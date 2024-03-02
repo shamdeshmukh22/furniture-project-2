@@ -1,0 +1,70 @@
+<%-include('navbar.ejs')%>
+<form action="/signup_user" method="post">
+<div class="container-fluid p-3 bg-white text-capitalize">
+    <div class="row justify-contect-center">
+        <div class="col-md-12 bg-dark p-2 text-white mb-4">
+            <h4> create new account....</h4>
+        </div>
+        <div class="col-3   "></div>
+        <div class="col-5 bg-light p-3 mb-5 shadow-lg ">
+               Enter full name
+               <input type="text" name="user_name" class="form-control"> <br>
+               Enter email
+               <input type="email" name="user_email" class="form-control"> <br>
+
+               Enter mobile number
+               <input type="number" name="user_mobile" class="form-control"> <br>
+
+               Enter password
+               <input type="password"  id="myInput"  name="password" class="form-control">
+               <h2 class="text-white" id="show"  onclick="myFunction()"><i class="fa-solid fa-eye"></i></h2>
+                <br>
+              
+               Enter Conform password
+               <input type="password" id="myInput2"  name="conform_password" class="form-control">
+               <h2 class="text-white" id="show"  onclick="myFunction2()"><i class="fa-solid fa-eye"></i></h2>
+                <br>
+               <div class="text-center">
+               <button class="btn btn-primary pe-5 ps-5">sign up</button>
+               <br>
+               <h6 class="mt-4">alerdy have account ? <a href="/login" style="color: blue;">
+                login </h6>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+</form>
+<style>
+     #show
+    {
+        margin-left:90%;
+        margin-top: -48px;
+        background-color: rgba(34, 39, 43,0.8);
+        color: white;
+        padding: 4px;
+        padding-left: 5px;
+        /* font-size: 15px; */
+        border-radius: 0px 10px 10px 0px;
+    }
+</style>
+<script>
+    function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+function myFunction2() {
+  var x = document.getElementById("myInput2");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
+<%-include('footer.ejs')%>

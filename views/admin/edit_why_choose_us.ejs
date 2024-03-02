@@ -1,0 +1,33 @@
+<%-include("navbar.ejs")%>
+<form action="/admin/update_why_key_point" method="post" enctype="multipart/form-data">
+    <div class="container bg-white shadow p-3  ">
+        <div class="row">
+           <div class="col-md-12 mb-4 bg-dark text-warning ">
+               <h3> update Why choose  Key Point </h3>
+           </div>
+            <div class="col-md-6">
+    
+    Update            name
+<input type="text" name="kp_name" id="" value="<%=points.kp_name%>" class=" mb-3 form-control">
+<input type="hidden" name="kp_id" id="" value="<%=points.kp_id%>" class=" mb-3 form-control">
+</div>
+<div class="col-md-4">
+   choose new image 
+   <input type="file" name="kp_image" id=""  class=" mb-3 form-control">
+</div>
+<div class="col-md-2 pt-4">
+   <img src="/uploads/<%=points.kp_image%>" height="50px" alt="">
+</div>
+<div class="col-md-12">
+   
+   Update Detail
+   <textarea name="kp_detail" id="" class="form-control"><%=points.kp_detail%></textarea>
+</div>
+<div class="col-md-12 mt-3 text-center">
+   <button class="btn btn-primary">Update Data</button>
+</div>
+</div>
+</div>
+
+       </form>
+       <%-include("footer.ejs")%>

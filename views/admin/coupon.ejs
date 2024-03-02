@@ -1,0 +1,19 @@
+<%-include('navbar.ejs')%>
+<form action="/admin/save_coupon" method="post">
+<div class="container bg-white p-4  ">
+    <div class="row">
+        <div class="col-md-12 bg-dark text-warning p-1">
+            <h4>Add new Coupons for new offer</h4>
+        </div>
+        <div class="col-md-12 bg-light p-3 mt-3">
+            <label for="co">coupon code</label>
+            <input type="text" name="coupon_code" value="<%=coupons.coupon%>" class="form-control">
+        </div>
+        <div class="col-md-12 mt-4 text-center">
+            <button class="btn btn-primary">Save coupon</button>
+        </div>
+    </div>
+</div>
+</form>
+
+<%-include('footer.ejs')%>

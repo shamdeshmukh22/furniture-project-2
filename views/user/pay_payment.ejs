@@ -1,0 +1,58 @@
+<!-- <button id="rzp-button1">Pay</button> -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<%
+var tot=0;
+for(var i=0;i<order_det.length;i++)
+{
+    tot += Number(order_det[i].product_qty) * Number(order_det[i].product_price);
+    
+    if(i==order_det.length-1)
+    {
+    var add_gst = (tot * 4.5) / 100;
+    tot=tot+add_gst;
+
+    var gst=(tot*3)/100;
+    var With_gst= Math.round(tot-gst); 
+    if(With_gst>10000)
+      {
+        With_gst=With_gst-500;
+      }
+
+      }
+    
+    %>
+    <!-- <span>hii<%=With_gst%></span> -->
+    <%
+}
+%>
+<script>
+
+var options = {
+    "key": "rzp_test_GmXyAFAK01Uo7t", // Enter the Key ID generated from the Dashboard
+    "amount": "<%=With_gst*100 %>", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "sham deshmukh", //your business name
+    "description": "Test Transaction",
+    "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn9FmoMjcsIFBgQfyqZVs6EN4JtXmWBdBZ4A&usqp=CAU",
+    // "order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the id obtained in the response of Step 1
+    "callback_url": "http://localhost:1000/payment_success/<%=order_id%>",
+    "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
+        "name": "sham deshmukh", //your customer's name
+        "email": "ghanshamdeshmukh2003@gmail.com",
+        "contact": "9322455289" //Provide the customer's phone number for better conversion rates 
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#ffff"
+    }
+};
+var rzp1 = new Razorpay(options);
+// document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+// }
+
+
+</script>

@@ -1,0 +1,16 @@
+<%-include("navbar.ejs")%>
+<div class="container bg-primary text-warning p-5">
+    <div class="row justify-contect-center">
+        <div class="col-12">
+            <h3 class="text-center">update product type detail</h3>
+            <form action="/admin/update_product_type_data" class="mt-5" method="post">
+                <input type="hidden" name="product_type_id" id="" value="<%=types.product_type_id%>">
+
+                Enter new name
+                <input type="text" name="product_type_name" id="" value="<%=types.product_type_name%>">
+                <button class="btn btn-success pl-5 pr-5">update</button>
+            </form>
+        </div>
+    </div>
+</div>
+<%-include("footer.ejs")%>

@@ -1,0 +1,42 @@
+<%-include('navbar.ejs')%>
+<div class="container-fluid bg-white p-3 text-capitalize">
+    <div class="row">
+        <div class="col-12 bg-dark p-1 text-warning">
+            <h4>Contact form data here ....</h4>
+            </div>
+            <div class="col-12 mt-5">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Sr No</th>
+                        <th> first Name</th>
+                        <th>last name</th>
+                        <th>email id</th>
+                        <th>message</th>
+                        <th>Confirm</th>
+                    </tr>
+                    <%
+                    for(var i=0;i<details.length;i++)
+                    {
+                        %>
+                        <tr>
+                            <td><%=i+1%></td>
+                            <td><%=details[i].customer_fname%>%></td>
+                            <td><%=details[i].customer_lname%>%></td>
+                            <td><%=details[i].customer_email%>%></td>
+                            <td><%=details[i].customer_message%>%></td>
+                            <td>
+                                <input type="checkbox" name="" class=" w-25 text-black"   style="height:20px;width:20px;">
+                            </td>
+                        </tr>
+                        <%
+                    }
+                    %>
+                </tbody>
+            
+            </table>
+        </div>
+    </div>
+</div>
+
+<%-include('footer.ejs')%>

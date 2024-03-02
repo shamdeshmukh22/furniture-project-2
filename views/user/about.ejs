@@ -1,0 +1,170 @@
+<%-include("navbar.ejs")%>
+	<!-- Start Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-5">
+                    <div class="intro-excerpt">
+                        <h1>About Us</h1>
+                        <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
+                        <p><a href="/shop" class="btn btn-secondary me-2">Shop Now</a><a href="" class="btn btn-white-outline" >Explore</a></p>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="hero-img-wrap">
+                        <img src="images/couch.png" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- End Hero Section -->
+
+
+
+<!-- Start Why Choose Us Section -->
+<div class="why-choose-section">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-lg-6">
+                <h2 class="section-title">Why Choose Us</h2>
+                <%
+                for(var i=0;i<wh.length;i++)
+                {
+                    %>
+                    <p><%=wh[i].why_heading%></p>
+                    <%
+                }
+                %>
+
+                <div class="row my-5">
+                    <%
+                    for(var i=0;i<whys.length;i++)
+                    {
+                        %>
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon">
+                                    <img src="/uploads/<%=whys[i].kp_image%>" alt="Image" class="imf-fluid">
+                                </div>
+                                <h3><%=whys[i].kp_name%></h3>
+                                <p><%=whys[i].kp_detail%></p>
+                            </div>
+                        </div>
+                        <%
+                    }
+                    %>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="img-wrap">
+                    <%
+                    for(var i=0;i<wh.length;i++)
+                    {
+                        %>
+                        <img src="/uploads/<%=wh[i].why_image%>" alt="Image" class="img-fluid">
+                        <%
+                    }
+                    %>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End Why Choose Us Section -->
+
+<!-- Start Team Section -->
+<div class="untree_co-section">
+    <div class="container">
+
+        <div class="row mb-5">
+            <div class="col-lg-5 mx-auto text-center">
+                <h2 class="section-title">Our Team</h2>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <%
+            for(var i=0;i<members.length;i++)
+            {
+                %>
+                <div class="col-12 col-md-6 col-lg-3 mb-5 mb-md-0">
+                    <img src="/uploads/<%=members[i].member_image%>" class="img-fluid mb-5">
+                    <h3 clas><a href="#"><%=members[i].member_name%></a></h3>
+        <span class="d-block position mb-4"><%=members[i].member_position%></span>
+        <p><%=members[i].member_detail%></p>
+        <p class="mb-0"><a href="#" class="more dark">Learn More <span class="icon-arrow_forward"></span></a></p>
+                </div> 
+                <%
+            }
+            %>
+        </div>
+    </div>
+</div>
+<!-- End Team Section -->
+
+
+
+<!-- Start Testimonial Slider -->
+<div class="testimonial-section before-footer-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 mx-auto text-center">
+                <h2 class="section-title">Testimonials</h2>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="testimonial-slider-wrap text-center">
+
+                    <div id="testimonial-nav">
+                        <span class="prev" data-controls="prev"><span class="fa fa-chevron-left"><</span></span>
+                        <span class="next" data-controls="next"><span class="fa fa-chevron-right">></span></span>
+                    </div>
+
+                    <div class="testimonial-slider">
+                        
+                        <%
+                        for(var i=0;i<tests.length;i++)
+                        {
+                            %>
+                            <div class="item">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-8 mx-auto">
+    
+                                        <div class="testimonial-block text-center">
+                                            <blockquote class="mb-5">
+                                                <p><%=tests[i].test_detail%></p>
+                                            </blockquote>
+    
+                                            
+                                            <div class="author-info">
+                                                <div class="author-pic">
+                                                    <img src="/uploads/<%=tests[i].test_image%>" alt="Maria Jones" height="100px" class="img-fluid">
+                                                </div>
+                                                <h3 class="font-weight-bold"><%=tests[i].test_name%></h3>
+                                                <span class="position d-block mb-3"><%=tests[i].test_position%></span>
+                                            </div>
+                                        </div>
+    
+                                    </div>
+                                </div>
+                            </div> 
+                            <%
+                        }
+                        %>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Testimonial Slider -->
+
+
+<%-include("footer.ejs")%>

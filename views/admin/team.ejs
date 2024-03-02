@@ -1,0 +1,78 @@
+<%-include('navbar.ejs')%>
+<form action="/admin/save_member" method="post" enctype="multipart/form-data">
+<div class="container-fluid bg-white p-3 text-capatalize">
+    <div class="row ">
+        <div class="col-md-12 bg-dark text-warning p-1 mb-4">
+            <h3>team member data here...</h3>
+        </div>
+        <div class="col-md-4 mb-4 ">
+            Enter member name
+            <input type="text" name="member_name" class="form-control bg-light" id="">
+           </div>
+        <div class="col-md-4 mb-4 ">
+         Enter member position
+         <input type="text" name="member_position" class="form-control bg-light" id="">
+        </div>
+
+
+        <div class="col-md-4 mb-4 ">
+            Enter member image
+            <input type="file" name="member_image" class="form-control bg-light" id="">
+           </div>
+
+        <div class="col-md-12 mb-4 ">
+            Enter member detail
+            <textarea name="member_detail" class="form-control bg-light" id=""></textarea>
+           </div>
+
+           <div class="col-md-12 text-center mb-4 ">
+            <button class="btn btn-primary pe-5 ps-5">Submit</button>
+            </div>
+
+    </div>
+</div>
+</form>
+
+<table class="table table-striped w-100 table-sm mt-5 bg-white text-capatalize">
+    <thead>
+        <h3 class="bg-dark text-warning p-1">All Member data here..</h3>
+    </thead>
+    <tbody>
+    <tr>
+        <th>Action</th>
+        <th>sr no</th>
+        <th>name</th>
+        <th>position</th>
+        <th>image</th>
+        <th>detail</th>
+    </tr>
+    <%
+    for(var i=0;i<members.length;i++)
+    {
+        %>
+        <tr>
+            <th>
+          <a href="/admin/delete_team/<%=members[i].member_id%>" onclick="return confirm('Are you sure ???')">
+            <button class="btn btn-warning text-white"><i class="fa-solid fa-trash"></i></button>
+          </a>
+          <a href="/admin/edit_team/<%=members[i].member_id%>">
+            <button class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></button>
+          </a>
+            </th>
+            <th><%=i+1%></th>
+            <th><%=members[i].member_name%></th>
+            <th><%=members[i].member_position%></th>
+            <th class="w-25">
+                <img src="/uploads/<%=members[i].member_image%>" class="w-100" height="200px" alt="">
+            </th>
+            <th class="w-25"><%=members[i].member_detail%></th>
+        </tr>
+        <%
+    }
+    %>
+
+</tbody>
+
+</table>
+
+<%-include('footer.ejs')%>

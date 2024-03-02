@@ -1,0 +1,100 @@
+<%-include("navbar.ejs")%>
+<form action="/admin/update_product" class="bg-white p-3" method="post" enctype="multipart/form-data">
+    <div class="container-fluid   ">
+        <div class="row">
+            <div class="col-md-12 mt-3 mb-3 bg-dark text-warning p-1">
+                <h4>product update here...</h4>
+                <input type="hidden" name="product_id" id="" value="<%=p_det[0].product_id%>">
+            </div>
+            <div class="col-md-3 ">
+                Update  type
+                <select name="product_type"  class="form-control " value="<%=p_det[0].product_type_name%>" >
+                    <option value=""  disabled>Update type</option>
+                    <%
+                    for(var i=0;i<p_det.length;i++)
+                    {
+                        %>
+                        <option value="<%=p_det[i].product_type_id%>"><%=p_det[i].product_type_name%></option>
+                        <%
+                    }
+                    %>
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+               Update  product name
+                <input type="text" name="product_name" id="" class="form-control" value="<%=p_det[0].product_name%>">
+            </div>
+            <div class="col-md-3 mb-3">
+               Update  product price
+                <input type="text" name="product_price" id="" class="form-control" value="<%=p_det[0].product_price%>">
+            </div>
+            <div class="col-md-3 mb-3">
+               Update  duplicate price
+                <input type="text" name="duplicate_price" id="" class="form-control" value="<%=p_det[0].duplicate_price%>">
+            </div>
+            <div class="col-md-3 mb-3">
+               Update  product image
+                <input type="file" multiple name="product_image" id="" class="form-control ">
+                <!-- <img src="/<%=p_det[0].product_image%>" width="30%" height="50px" alt=""> -->
+            </div>
+            <div class="col-md-3 mb-3">
+               Update  product size
+                <input type="text" name="product_size" id="" class="form-control" value="<%=p_det[0].product_size%>">
+            </div>
+            <div class="col-md-3 mb-3">
+               Update  product color
+                <input type="color" name="product_color" id="" class="form-control" value="<%=p_det[0].product_color%>">
+            </div>
+            <div class="col-md-3 mb-3">
+               Update  product label
+                <input type="text" name="product_label" id="" class="form-control" value="<%=p_det[0].product_label%>">
+            </div>
+           
+            
+            <div class="col-md-12">
+                product detail
+                <textarea name="product_detail" id="" class="form-control"><%=p_det[0].product_detail%></textarea>
+    
+            </div>
+           
+            <div class="col-md-12 mt-4 text-center">
+                 <button class="btn btn-primary pl-5 pr-5">update product</button>
+            </div>
+        </div>
+    </div>
+    </form>
+    <div class="container">
+        <div class="row">
+            <%
+            var arr=p_det[0].product_image.split("+||+");
+            for(var i=0;i<arr.length;i++)
+            {
+                if(arr[i] != "")
+                {
+                %>
+                <div class="col-md-4 mt-4 bg-light p-3 text-center">
+                    <img src="/uploads/<%=arr[i]%>" width="100%" height="200px" alt="">
+                    <a style="text-decoration: none"; href="/admin/delete_pro_image/<%=p_det[0].product_id%>/<%=arr[i]%>">
+                        <button class="btn btn-danger mt-4 text-white">Delete</button>
+                       </a>
+                       <a style="text-decoration: none"; href="/admin/update_pro_image/<%=p_det[0].product_id%>/<%=arr[i]%>">
+                        <button class="btn btn-primary mt-4 ms-2" >Update</button>
+                    </a>
+                  </div>
+                
+                <%
+                }
+            }
+              %>
+             
+
+        </div>
+    </div>
+<%-include("footer.ejs")%>
+
+<!-- <script>
+    function Update_img(s)
+    {
+       console.log(s);
+    }
+</script> -->

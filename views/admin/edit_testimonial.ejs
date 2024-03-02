@@ -1,0 +1,35 @@
+<%-include("navbar.ejs")%>
+
+<form action="/admin/update_test_data" method="post" enctype="multipart/form-data">
+    <div class="container bg-white p-4 ">
+        <div class="row">
+            <div class="col-md-12 bg-dark p-1 text-warning ">
+                <h4 class="ml-5"> update testimonials page ....</h4>
+            </div>
+            <div class="col-md-4 mt-3 ">
+               Update name
+                <input type="text" name="customer_name" class="form-control" id="" value="<%=tests.test_name%>">
+                <input type="hidden" name="customer_id" class="form-control" id="" value="<%=tests.test_id%>">
+            </div>
+            <div class="col-md-4 mt-3">
+                Update position
+                 <input type="text" name="customer_position" class="form-control" id="" value="<%=tests.test_position%>">
+             </div>
+             <div class="col-md-4 mt-3">
+                Update image
+                 <input type="file" name="customer_image" class="form-control" id="">
+                 <img class="mt-3" src="/uploads/<%=tests.test_image%>" height="150px" width="100%" alt="">
+             </div>
+             <div class="col-md-12 mt-3">
+                Update message
+                 <textarea name="customer_message" class="form-control" id="">
+                    <%=tests.test_detail%>
+                 </textarea>
+             </div>
+            <div class="col-md-12 text-center mt-3">
+                <button class="btn btn-primary">Update testimonials</button>
+            </div>
+        </div>
+    </div>
+</form>
+<%-include("footer.ejs")%>

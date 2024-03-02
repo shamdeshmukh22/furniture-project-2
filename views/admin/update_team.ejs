@@ -1,0 +1,39 @@
+<%-include('navbar.ejs')%>
+<form action="/admin/update_member" method="post" enctype="multipart/form-data">
+<div class="container-fluid bg-white p-3 text-capatalize">
+    <div class="row ">
+        <div class="col-md-12 bg-dark text-warning p-1 mb-4">
+            <h3>Update team member data here...</h3>
+            <input type="hidden" name="member_id" class="form-control bg-light" value="<%=m_det.member_id%>" id="">
+        </div>
+        <div class="col-md-6 mb-4 ">
+            Update member name
+            <input type="text" name="member_name" class="form-control bg-light" value="<%=m_det.member_name%>" id="">
+           </div>
+        <div class="col-md-6 mb-4 ">
+         Update member position
+         <input type="text" name="member_position" class="form-control bg-light" value="<%=m_det.member_position%>">
+        </div>
+
+
+        <div class="col-md-6 mb-4 ">
+            Update member image
+            <input type="file" name="member_image" class="form-control bg-light" id="">
+           </div>
+           <div class="col-md-5">
+            <img src="/uploads/<%=m_det.member_image%>" width="50%" height="150px" alt="">
+
+           </div>
+
+        <div class="col-md-12 mb-4 ">
+            Update member detail
+            <textarea name="member_detail" class="form-control bg-light" ><%=m_det.member_detail%></textarea>
+           </div>
+           <div class="col-md-12 text-center mb-4 ">
+            <button class="btn btn-primary pe-5 ps-5">Update</button>
+            </div>
+
+    </div>
+</div>
+</form>
+<%-include('footer.ejs')%>

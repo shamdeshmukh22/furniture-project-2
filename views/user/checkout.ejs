@@ -1,0 +1,213 @@
+<%-include("navbar.ejs")%>
+<!-- Start Hero Section -->
+<div class="hero">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="intro-excerpt">
+                    <h1>Checkout</h1>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Hero Section -->
+
+<form action="/save_order" method="post">
+<div class="untree_co-section">
+<div class="container">
+  
+  <div class="row">
+    <div class="col-md-6 mb-4 mb-5 mb-md-0">
+      <h2 class="h3 mb-3 text-black">Billing Details</h2>
+      <div class="p-3 p-lg-5 border bg-white">
+        <div class="form-group mb-4">
+          <label for="c_country" class="text-black">Country <span class="text-danger">*</span></label>
+          <select id="c_country" name="country" class="form-control">
+            <option value="" selected disabled>Select a country</option>    
+            <option value="india">india</option>    
+            <option value="bangladesh">bangladesh</option>    
+            <option value="Algeria">Algeria</option>    
+            <option value="Afghanistan">Afghanistan</option>    
+            <option value="Ghana">Ghana</option>    
+          </select>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6 mb-4">
+            <label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="c_fname" name="c_fname">
+          </div>
+          <div class="col-md-6">
+            <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="c_lname" name="c_lname">
+          </div>
+        </div>
+
+       
+
+        <div class="form-group row">
+          <div class="col-md-12">
+            <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="c_address" name="c_address" placeholder="Street address">
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <input type="text" class="form-control mb-4"  name="c_area" placeholder="Apartment, suite, unit etc. (optional)">
+        </div>
+
+        <div class="form-group row">
+          <div class="col-md-6 mb-3 ">
+            <label for="c_state" class="text-black">State  <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="c_state" name="c_state">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="c_postal_zip" class="text-black">Posta / Zip <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="c_postal_zip" name="c_postal_zip">
+          </div>
+        </div>
+
+        <div class="form-group row mb-5">
+          <div class="col-md-6 mb-3">
+            <label for="c_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="c_email_address" name="c_email">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="c_phone" name="c_phone" placeholder="Phone Number">
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+
+     
+
+      <div class="row mb-5">
+        <div class="col-md-12">
+          <h2 class="h3 mb-3 text-black">Your Order</h2>
+          <div class="p-3 p-lg-5 border bg-white" >
+            <div style="height:400px; overflow-y:scroll;" class="mb-4">
+
+            <table class="table site-block-order-table mb-5" >
+
+                <%
+                for(var i=0;i<products.length;i++)
+                {
+                  %>
+                  <thead>
+                    <tr class="pt-3">
+                    <th colspan="2" class="mt-3 bg-dark w-100 p-1 text-white text-center">Product No : <%=i+1%></th>
+                    </tr>
+                    <tr > 
+                    <th>Product</th>
+                    <th>Total</th>
+                  </tr>
+
+                  </thead>
+                  <tbody >
+                  <tr>
+                    <td>Product name</td>
+                    <td><%=products[i].product_name%></td>
+                  </tr>
+                  <tr>
+                   <td>product price</td> 
+                   <td><%=products[i].product_price%></td>
+                  </tr>
+
+                  <tr>
+                    <td>product qty</td> 
+                    <td><%=products[i].qty%></td>
+                   </tr>
+                   <tr>
+                    <td>total</td> 
+                    <td class="user_subtotal">
+                      <%=products[i].product_price*products[i].qty%>                   
+                     </td>
+                   </tr>
+
+                   <tr>
+                    <th colspan="2"></th>
+                   </tr>
+              </tbody>
+                  <%
+                }
+                %>
+  
+                <!-- print all total -->
+                     <h4 class="text-black ">All Total Product price : <span id="total"></span> </h4>
+                     <!-- <h5 class="text-black mt-3 mb-3">GST : 3%</h5>
+                     <h5 class="text-black mt-3 mb-3">Offer : <strong class="text-secondary">&#8377;500Rs(above buying &#8377;10,000 )</strong>   </h5> -->
+
+            </table>
+          </div>
+
+
+            <div class="border p-3 mb-3 mt-5">
+              <h3 class="h6 mb-0"><label class="d-block text-black"   role="button">
+                <input class="me-3" type="radio" value="cod" required name="Payment" id="">
+                Cash On Delivery(COD)</label></h3>
+            </div>
+
+            <div class="border p-3 mb-3 ">
+              <h3 class="h6 mb-0"><label class="d-block text-black"    role="button">
+                <input class="me-3 " checked  type="radio"  name="Payment" value="online">
+                Online Payment (Cards,UPI,Etc..)</label></h3>
+            </div>
+
+
+            <div class="form-group text-center mt-5 ">
+              <a href="/order">
+              <button class="btn btn-black btn-sm py-3 btn-block w-50"  >Place Order</button>
+            </a>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+</form>
+
+
+<%-include("footer.ejs")%>
+
+<script>
+    function Subtotal()
+  {
+  var tot= document.getElementsByClassName('user_subtotal');
+
+   var sum=0;
+
+   for(var i=0;i<tot.length;i++)
+   {
+    sum+= Number( tot[i].innerHTML);
+   }
+
+   var add_gst=(sum*4.5)/100;
+     sum=sum+add_gst;
+  var gst=(sum*3)/100;
+  var With_gst=sum-gst; 
+  if(With_gst>10000)
+  {
+    With_gst=With_gst-500;
+  }
+  let parts = With_gst.toString().split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    var abc= '₹' + parts.join('.');
+
+  // $('#total').val("sham");
+  console.log(abc)
+  document.getElementById('total').innerHTML=abc;
+  }
+
+  Subtotal();
+</script>

@@ -1,0 +1,66 @@
+<%-include('navbar.ejs')%>
+
+     <form action="/admin/save_why_key_point" method="post" enctype="multipart/form-data">
+         <div class="container bg-white p-3">
+             <div class="row">
+                <div class="col-md-12 mb-4 bg-dark text-warning ">
+                    <h4>Why choose us Key Point </h4>
+                </div>
+                 <div class="col-md-6">
+         Enter name
+     <input type="text" name="kp_name" id="" class=" mb-3 form-control">
+    </div>
+    <div class="col-md-6">
+        choose your image 
+        <input type="file" name="kp_image" id="" class=" mb-3 form-control">
+    </div>
+    <div class="col-md-12 ">
+        Enter Detail
+        <textarea name="kp_detail" id="" class="form-control"></textarea>
+    </div>
+    <div class="col-md-12 mt-3 text-center">
+        <button class="btn btn-primary">Save Data</button>
+    </div>
+    </div>
+    </div>
+
+            </form>
+ <div class="container-fluid bg-white p-3 mt-5">
+     <div class="row">
+         <div class="col-md-12">
+            <table border="1" class="table table-striped">
+                <tr>
+                    <th>action</th>
+                    <th>sr no</th>
+                    <th>name</th>
+                    <th>detail</th>
+                    <th>image</th>
+                </tr>
+                <%
+                for(var i=0;i<data.length;i++)
+                {
+                    %>
+                    <tr>
+                        <td>
+                            <a href="/admin/delete_why_choose_us/<%=data[i].kp_id%>" onclick="return confirm('are you sure????')">
+                                <button class=" btn btn-warning  text-white "><i class=" fa-solid fa-trash"></i></button>
+                            </a>
+                            <a href="/admin/edit_why_choose_us/<%=data[i].kp_id%>">
+                                <button class="btn btn-primary ml-3  text-white "><i class="fa-solid fa-pen-to-square"></i></button>
+                            </a>
+                        </td>
+                        <td><%=i+1%></td>
+                        <td><%=data[i].kp_name%></td>
+                        <td class="w-25"><%=data[i].kp_detail%></td>
+                        <td>
+                         <img src="/uploads/<%=data[i].kp_image%>" width="80%" height="100px" alt=""> 
+                          </td>
+                    </tr>
+                    <%
+                }
+                %>
+            </table>
+         </div>
+     </div>
+ </div>
+<%-include('footer.ejs')%>

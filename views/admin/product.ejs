@@ -1,0 +1,64 @@
+<%- include('navbar.ejs') %>
+<form action="/admin/add_product" method="post" enctype="multipart/form-data">
+<div class="container-fluid bg-white p-4">
+    <div class="row">
+        <div class="col-md-12 bg-dark text-warning p-1 mt-3 mb-4">
+            <h3>Add new product  here</h3>
+        </div>
+        <div class="col-md-3 ">
+            select  type
+            <select name="product_type" required class="form-control ">
+                <option value="" selected disabled>choose type</option>
+                <%
+                for(var i=0;i<types.length;i++)
+                {
+                    %>
+                    <option value="<%=types[i].product_type_id%>"><%=types[i].product_type_name%></option>
+                    <%
+                }
+                %>
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            product name
+            <input type="text" name="product_name" id="" class="form-control">
+        </div>
+        <div class="col-md-3 mb-3">
+            product price
+            <input type="text" name="product_price" id="" class="form-control">
+        </div>
+        <div class="col-md-3 mb-3">
+            duplicate price
+            <input type="text" name="duplicate_price" id="" class="form-control">
+        </div>
+        <div class="col-md-3 mb-3">
+            product image
+            <input type="file" multiple name="product_image" id="" class="form-control">
+        </div>
+        <div class="col-md-3 mb-3">
+            product size
+            <input type="text" name="product_size" id="" class="form-control">
+        </div>
+        <div class="col-md-3 mb-3">
+            product color
+            <input type="color" name="product_color" id="" class="form-control">
+        </div>
+        <div class="col-md-3 mb-3">
+            product label
+            <input type="text" name="product_label" id="" class="form-control">
+        </div>
+       
+        
+        <div class="col-md-12">
+            product detail
+            <textarea name="product_detail" id="" class="form-control"></textarea>
+
+        </div>
+        <div class="col-md-12 mt-4 text-center">
+             <button class="btn btn-primary pl-5 pr-5">submit</button>
+        </div>
+    </div>
+</div>
+</form>
+
+<%- include('footer.ejs') %>

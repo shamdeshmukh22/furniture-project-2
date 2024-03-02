@@ -1,0 +1,71 @@
+<%- include('navbar.ejs') %>
+<form action="/admin/save_testimonials" method="post" enctype="multipart/form-data">
+    <div class="container bg-white p-3">
+        <div class="row">
+            <div class="col-md-12 bg-dark p-2 text-warning mt-3  ">
+                <h3 class="ml-5">testimonials page ....</h3>
+            </div>
+            <div class="col-md-4 mt-3">
+               Enter name
+                <input type="text" name="customer_name" class="form-control" id="">
+            </div>
+            <div class="col-md-4 mt-3">
+                Enter position
+                 <input type="text" name="customer_position" class="form-control" id="">
+             </div>
+             <div class="col-md-4 mt-3">
+                Enter image
+                 <input type="file" name="customer_image" class="form-control" id="">
+             </div>
+             <div class="col-md-12 mt-3">
+                Enter message
+                 <textarea name="customer_message" class="form-control" id=""></textarea>
+             </div>
+            <div class="col-md-12 text-center mt-3">
+                <button class="btn btn-primary">Save testimonials</button>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="container bg-white p-4 mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tr>
+                    <th>action</th>
+                    <th>SR NO</th>
+                    <th>customer_name</th>
+                    <th>customer_position</th>
+                    <th>customer_image</th>
+                </tr>
+                <%
+                           for(var i=0;i<tests.length;i++)
+                           {
+                            %>
+                            <tr>
+                                <td>
+                                   
+                                        <a href="/admin/delete_testimonial/<%=tests[i].test_id%>" onclick="return confirm('Are you sure to delete this testimonial?')">
+                                            <button class="btn btn-warning text-white"><i class="fa-solid fa-trash"></i></button>
+                                        </a>
+                                        
+                                        <a href="/admin/edit_testimonial/<%=tests[i].test_id%>">
+                                            <button class="btn btn-primary ml-3 text-white"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        </a>
+                                  
+                                </td>
+                                <td><%=i+1%></td>
+                                <td><%=tests[i].test_name%></td>
+                                <td><%=tests[i].test_position%></td>
+                                <td>
+                                    <img src="/uploads/<%=tests[i].test_image%>" width="100%" height="100px" alt="">
+                                    </td>
+                            </tr>
+                            <%
+                           }                    
+                %>
+            </table>
+        </div>
+    </div>
+</div>
+<%- include('footer.ejs') %>

@@ -1,0 +1,58 @@
+<%- include('navbar.ejs') %>
+<form action="/admin/update_modern_inte" method="post" enctype="multipart/form-data">
+<div class="container-fluid bg-white p-3 mt-4">
+    <div class="row">
+        <div class="col-md-12 bg-dark text-warning p-1">
+            <h3>modern interior page .....</h3>
+        </div>
+            <div class="col-md-4 mt-4 mb-3">
+                Enter image 1
+                <input type="file" name="modern_img1" id="" class="form-control">
+                <img class="mt-3" src="/uploads/<%=details.modern_img1%>" width="100%" height="150px"  alt="">
+            </div>
+            <div class="col-md-4 mt-4 mb-3">
+                Enter image 2
+                <input type="file" name="modern_img2" id="" class="form-control">
+                <img class="mt-3" src="/uploads/<%=details.modern_img2%>" width="100%" height="150px"  alt="">
+
+            </div>
+            <div class="col-md-4 mt-4 mb-3">
+                Enter image 3
+                <input type="file" name="modern_img3" id="" class="form-control">
+                <img class="mt-3" src="/uploads/<%=details.modern_img3%>" width="100%" height="150px"  alt="">
+
+            </div>
+            <div class="col-md-12 mb-3">
+                Enter heading
+                <input type="text" name="modern_heading" value="<%=details.modern_heading%>" class="form-control">
+            </div>
+            <div class="col-md-3 mb-3">
+                Enter key 1
+                <input type="text" name="modern_key1" id="" value="<%=details.modern_key1%>" class="form-control">
+            </div>
+            
+             <div class="col-md-3 mb-3">
+                Enter key 2
+                <input type="text" name="modern_key2" value="<%=details.modern_key2%>" class="form-control">
+            </div>
+            <div class="col-md-3 mb-3">
+                Enter key 3
+                <input type="text" name="modern_key3" id="" value="<%=details.modern_key3%>" class="form-control">
+            </div>
+            <div class="col-md-3 mb-3">
+                Enter key 4
+                <input type="text" name="modern_key4" id="" class="form-control" value="<%=details.modern_key4%>">
+            </div>
+
+            <div class="col-md-12 mb-3">
+                Enter detail
+                <textarea name="modern_detail" id="" class="form-control"><%=details.modern_detail%></textarea>
+            </div>
+            <div class="col-md-12  text-center">
+                <button class="btn btn-primary">Save modern </button>
+            </div>
+    </div>
+</div>
+</form>
+
+<%- include('footer.ejs') %>

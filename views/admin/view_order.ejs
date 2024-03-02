@@ -1,0 +1,145 @@
+<%-include('navbar.ejs')%>
+<div class="container">
+    <div class="card">
+  <div class="card-header">
+  Invoice
+  <strong><%=orders.order_date%></strong> 
+    <span class="float-end"> <strong>Status:</strong><%=orders.order_status%></span>
+  
+  </div>
+  <div class="card-body">
+  <div class="row mb-4">
+  <div class="col-sm-6">
+  <h6 class="mb-3">From:</h6>
+  <div>
+  <strong>sham deshmukh</strong>
+  </div>
+  <div>pathrdi ,414102</div>
+  <div>Ahmadnagar,Maharastra</div>
+  <div>Email:sham@gmail.com</div>
+  <div>Phone: +91 9322455289</div>
+  </div>
+  
+  <div class="col-sm-6">
+  <h6 class="mb-3">To:</h6>
+  <div>
+  <strong><%=orders.c_fname%>  <%=orders.c_lname%></strong>
+  </div>
+  <div><%=orders.c_address%>,<%=orders.c_state%></div>
+  <div><%=orders.c_area%>,<%=orders.country%>,<%=orders.c_postal_zip%></div>
+  <div>Email: <%=orders.c_email%></div>
+  <div>Phone: <%=orders.c_phone%></div>
+  </div>
+  
+  
+  
+  </div>
+  
+  <div class="table-responsive-sm">
+  <table class="table table-striped">
+  <thead>
+  <tr>
+  <th class="center">Sr no</th>
+  <th>Item Name</th>
+  <th class="right">Price</th>
+  <th class="center">Qty</th>
+  <th class="right">Total</th>
+  </tr>
+  </thead>
+  <tbody>
+    <%
+    var tot=0;
+    products.map((val,i)=>
+    {
+        tot+=val.product_qty*val.product_price;
+        <!-- console.log(tot); -->
+        %>
+         <tr>
+            <td class="center"><%=i+1%></td>
+            <td class="left strong"><%=val.product_name%></td>
+            <td class="right"><%=val.product_price%></td>
+            <td class="center"><%=val.product_qty%></td>
+            <td class="right"><%=val.product_qty*val.product_price%></td>
+            </tr>
+        <%
+    })
+    %>
+    <tr class="text-center">
+        <td colspan="4">
+            <h5 class="text-black font-weight-bold float-end me-5" >Total price is : &#8377;<span class="text-danger" id="tot"><%=tot%></span> </h5>
+        </td>
+    </tr>
+  </tbody>
+  </table>
+  </div>
+  <div class="row">
+  <div class="col-lg-4 col-sm-5">
+    <a href="/admin/to_dispatch/<%=orders.order_id%>">
+  <button class="btn btn-primary">transfered to Dispatch</button>
+</a>
+  </div>
+  
+  <div class="col-lg-4 col-sm-5 ml-auto">
+  <table class="table table-clear">
+  <tbody>
+  <tr>
+  <td class="left">
+  <strong>Subtotal</strong>
+  </td>
+  <td class="right">&#8377;<%=tot%></td>
+  </tr>
+  <tr>
+  <td class="left">
+  <strong>Gst</strong>
+  </td>
+  <td class="right">+4.5%</td>
+  </tr>
+  <tr>
+  <td class="left">
+   <strong>Discount</strong>
+  </td>
+  <td class="right ">-3%</td>
+  </tr>
+  <tr>
+  <td class="left">
+  <strong>Total</strong>
+  </td>
+  <td class="right">
+  <strong> &#8377;<span id="add_total"></span></strong>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+  
+  </div>
+  
+  </div>
+  
+  </div>
+  </div>
+  </div>
+
+  <%-include('footer.ejs')%>
+  <script>
+    function countTot()
+    {
+   var total= Number( document.getElementById('tot').innerHTML);
+//    to add gst
+    var  gst=(total*4.5)/100;
+    total= total+gst;
+    // to subtract discount
+    var dis=(total*3)/100;
+    total=total-dis;
+// to subtract 500 rupees
+if(total>10000)
+   {
+       total=total-500;
+   }
+    // to round value
+  var r_total= Math.round(total);
+   document.getElementById('add_total').innerHTML=r_total;
+
+
+    }
+    countTot();
+</script>

@@ -1,0 +1,113 @@
+<%-include('navbar.ejs')%>
+
+<% if(product_info) {
+  var imgs = product_info.product_image.split('+||+');
+  var img = "";
+  for(var j=0; j<imgs.length; j++) {
+      if(imgs[j] !== '') {
+          img = imgs[j];
+          break;
+      }
+  }
+%>
+
+<section class="py-5 mb-5">
+    <div class="container">
+      <div class="row gx-5">
+        <aside class="col-lg-6">
+          <div class="border rounded-4 mb-3 d-flex justify-content-center">
+            <a data-fslightbox="mygalley" class="rounded-4" target="_self" data-type="image" href="/uploads/<%=img%>">
+              <img style="height: 300px; width:100%;" class=" img-fluid rounded-4 fit" id="img1" src="/uploads/<%=img%>" />
+            </a>
+          </div>
+          <div class="d-flex justify-content-center mb-3">
+
+          <% for(var i = 0; i < imgs.length; i++) {
+            if(imgs[i] !== '') { %>
+                <a data-fslightbox="mygallery" class="border mx-1 rounded-2" target="_self" data-type="image" href="/uploads/<%=imgs[i]%>" class="item-thumb">
+                    <img width="60" height="60"  id=""  class="rounded-2" src="/uploads/<%=imgs[i]%>" />
+                </a>
+        <% } } %>
+      </div>
+
+        
+
+          <!-- thumbs-wrap.// -->
+          <!-- gallery-wrap .end// -->
+        </aside>
+        <main class="col-lg-6">
+          <div class="ps-lg-3">
+            <h4 class="title text-dark">
+              <%=product_info.product_name%>
+            </h4>
+            <div class="d-flex flex-row my-3">
+              <div class="text-warning mb-1 me-2">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              
+              </div>
+            </div>
+  
+            <div class="mb-3">
+              <span class=" bg-primary text-white  p-2"><%=product_info.product_label%></span>
+              <span class="h5">&#8377;<%=product_info.product_price%></span>
+              <span class="text-muted">/per box</span>
+            </div>
+  
+            <p>
+              <%=product_info.product_detail%>
+            </p>
+  
+            <div class="row">
+              <dt class="col-3">Type:</dt>
+              <dd class="col-9"><%=product_info.product_type_name%></dd>
+  
+              <dt class="col-3">Color</dt>
+              <dd class="col-9">
+                <div  style="height:20px; width:30%; background:<%=product_info.product_color%>;">
+
+                </div>
+              </dd>
+  
+              <dt class="col-3">size</dt>
+              <dd class="col-9"><%=product_info.product_size%></dd>
+              
+            </div>
+
+            <hr />
+            </div>
+            <!-- <a href="#" class="btn btn-warning shadow-0"> Buy now </a> -->
+            <%
+            if(check.length==0)
+            {
+              %>
+            <a href="/add_to_cart/<%=product_info.product_id%>" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
+              <%
+            }
+            else
+            {
+              %>
+            <a href="/cart" class="btn btn-success shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> GO to cart </a>
+            <!-- <a href="/delele" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Delete from cart </a> -->
+              <%
+            }
+            %>
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+  <br><br><br>
+  <%}%>
+  <%-include('footer.ejs')%>
+
+  <!-- <script>
+    function change_img()
+    {
+    // alert("sham")
+    console.log("sham")
+    }
+  </script> -->

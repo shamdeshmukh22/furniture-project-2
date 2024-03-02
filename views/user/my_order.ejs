@@ -1,0 +1,63 @@
+<%- include('navbar.ejs') %>
+
+<br><br>
+
+<div class="container bg-white p-4">
+    <div class="row">
+        <div class="col-md-12 bg-dark text-warning p-1">
+            <h3>My Orders</h3>
+        </div>
+    </div>
+</div>
+
+
+<div class="container ">
+    <div class="row">
+        <% 
+        for(var i=0; i<orders.length; i++)
+  { 
+    var tot= orders[i].total_amt;
+    var add_gst = (tot * 4.5) / 100;
+     tot=tot+add_gst;
+
+   var gst=(tot*3)/100;
+   var With_gst= Math.round(tot-gst); 
+  
+   if(With_gst>10000)
+   {
+    With_gst=With_gst-500;
+    } 
+     With_gst = With_gst.toString().split('.');
+    With_gst[0] = With_gst[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+     With_gst = '₹' + With_gst.join('.');
+    %>
+            <div class="col-md-5 mt-4 me-5 ms-4 shadow p-3 border text-white" style="background-color: #3b5d50;">
+                <a href="/print_order/<%= orders[i].order_id %>" class="text-white" style="text-decoration: none;">
+
+                     <span class="p-1 text-white text-uppercase <%= orders[i].order_status === 'dispatch' ? 'bg-danger' : 'bg-secondary' %> <%= orders[i].order_status === 'delivered' ? 'bg-success' : 'bg-secondary' %>">
+                        <%= orders[i].order_status%> Order
+                    </span>
+                    <br>
+                    #FURNI<%= orders[i].order_id %>
+                    <span class="float-end">
+                        <%= orders[i].order_date %>
+                    </span>
+                    <div class="row">
+                        <div class="col-md-12">
+                            &#8377; <%=With_gst%>
+                            <span class="float-end text-uppercase">
+                                payment: <%= orders[i].payment_status %>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<br><br>
+<br><br>
+<br><br>
+
+<%- include('footer.ejs') %>

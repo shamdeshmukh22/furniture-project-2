@@ -1,0 +1,44 @@
+<%-include('navbar.ejs')%>
+<div class="container-fluid bg-white p-3 text-capitalize">
+    <div class="row">
+        <div class="col-md-12 bg-dark text-warning p-1 mt-3 mb-3">
+            <h3>dispatch orders</h3>
+            </div>
+            <div class="col-md-12">
+            <table class="table table-sm table-striped w-100 table-bordered text-capitalize">
+                <tbody>
+                <tr>
+                    <th>Action</th>
+                    <th>sr no</th>
+                    <th>customer name</th>
+                    <th>customer no</th>
+                    <th>customer address</th>
+                    <th>total amount</th>
+                    <th>status</th>
+                </tr>
+                <%
+                orders.map(function(val,i)
+                {
+                    %>
+                       <tr>
+                        <th>
+                            <a href="/admin/view_order_dis/<%=val.order_id%>">
+                            <button class="btn btn-primary btn-sm">View order</button>
+                        </a>
+                        </th>
+                        <th><%=i+1%></th>
+                        <th><%=val.c_fname+' '+ val.c_lname%></th>
+                        <th><%=val.c_phone%></th>
+                        <th><%=val.c_address%></th>
+                        <th><%=val.ttl_amount%></th>
+                        <th><%=val.order_status%></th>
+                       </tr>
+                       <%
+                })
+                %>
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<%-include('footer.ejs')%>

@@ -1,0 +1,20 @@
+<%- include('navbar.ejs') %>
+<div class="container bg-white p-3">
+    <div class="row">
+            <div class="col-md-12 mb-4 bg-dark text-warning ">
+            <h4>Why choose us page</h4>
+        </div>
+        <div class="col-md-12">
+            <form action="/admin/save_why_choose_us" method="post" enctype="multipart/form-data">
+            Enter Heading :
+            <input type="text" name="why_heading" id="" class="form-control mb-3" value="<%=w_det.why_heading%>">
+            choose image
+            <input type="file" name="why_image" id="" class="form-control mb-3 ">
+            <img src="/uploads/<%=w_det.why_image%>" height="100px" width="20%" alt="">
+             <br>
+            <button class="btn btn-primary mt-3 ml-5 pl-4 pr-5  w-25" style="margin-left:40%;">Submit</button>
+        </form>
+        </div>
+    </div>
+</div>
+<%- include('footer.ejs') %>

@@ -1,0 +1,280 @@
+<%-include("navbar.ejs")%>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+	<!-- Start Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-5">
+                    <div class="intro-excerpt">
+                        <h1>Cart</h1>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- End Hero Section -->
+
+
+
+<div class="untree_co-section before-footer-section">
+    <div class="container">
+      <div class="row mb-5">
+        <form class="col-md-12" method="post">
+          <div class="site-blocks-table">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="product-thumbnail">Image</th>
+                  <th class="product-name">Product</th>
+                  <th class="product-price">Price</th>
+                  <th class="product-quantity">Quantity</th>
+                  <th class="product-total">Total</th>
+                  <th class="product-remove">Remove</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%
+                for(var i=0;i<products.length;i++)
+                {
+                    var imgs = products[i].product_image.split('+||+');
+                    var img = "";
+                    for(var j=0; j<imgs.length; j++) {
+                        if(imgs[j] !== '') {
+                            img = imgs[j];
+                            break;
+                        }
+                    }
+                  %>
+                  <tr>
+                    <td class="product-thumbnail">
+                      <img src="/uploads/<%=img%>" alt="Image" class="img-fluid">
+                    </td>
+                    <td class="product-name">
+                      <h2 class="h5 text-black"><%=products[i].product_name%></h2>
+                    </td>
+                    <td>
+                      <%
+                      if(products[i].product_price)
+                      {
+                          let parts = products[i].product_price.toString().split('.');
+                          parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                          var formattedPrice = '₹' + parts.join('.');
+                      %>
+                          <strong class="product-price"><%= formattedPrice %></strong>
+                      <%
+                      }
+                      %>
+                    </td>
+                    <td>
+                      <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
+                        <div class="input-group-prepend">
+                          <button class="btn btn-outline-black " type="button" onclick="decreaseQty('<%=products[i].cart_id%>')">&minus;</button>
+                        </div>                  
+                              <input type="text" class="form-control text-center quantity-amount" id="user_qty<%=products[i].cart_id%>" value="<%=products[i].qty%>" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-black " type="button" onclick="IncreaseQty('<%=products[i].cart_id%>')">&plus;</button>
+                        </div>
+                      </div>
+  
+                    </td>
+                    <td>&#8377;
+                      <span id="user_total<%=products[i].cart_id%>" class="user_subtotal">
+                        <%=products[i].product_price*products[i].qty%>
+                      </span></td>
+                    <td><a href="/delete_cart/<%=products[i].product_id%>" class="btn btn-black btn-lg" onclick="return confirm('Are You Sure???')">
+                     <i class="fa-solid fa-trash-can"></i>
+                    </a></td>
+                  </tr>
+                  <%
+                }
+                %>
+                
+                <%
+                if(products.length==0 && user_id !=undefined)
+                {
+                  %>
+                  <tr>
+                    <td colspan="6">
+                      <h3 class="text-center text-danger">Cart List Is Empty</h3>
+                    </td>
+                  </tr>
+                  <%
+                }
+                %>
+
+               
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row mb-5">
+            <div class="col-md-6 mb-3 mb-md-0">
+            </div>
+            <div class="col-md-6"><a href="/shop">
+              <button class="btn btn-outline-black btn-sm btn-block">Continue Shopping</button>
+            </a>
+
+            </div>
+          </div>
+
+          <form action="/add_coupon" method="post">
+          <div class="row">
+            <div class="col-md-12">
+              <label class="text-black h4" for="coupon">Coupon</label>
+              <p>Enter your coupon code if you have one.</p>
+            </div>
+            <div class="col-md-8 mb-3 mb-md-0">
+              <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code" name="coupon">
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-black btn-sm">Apply Coupon</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+        <div class="col-md-6 pl-5">
+          <div class="row justify-content-end">
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-md-12 text-right border-bottom mb-5">
+                  <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <span class="text-black">Subtotal</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <strong class="text-black"><span id="allTotal"></span></strong>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <span class="text-black">GST</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <strong class="text-black">+4.5%</strong>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <span class="text-black">Discount</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <strong class="text-black">-3%</strong>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-3">
+                  <span class="text-black">Offer</span>
+                </div>
+                <div class="col-md-9 text-right">
+                  <strong class="text-black">&#8377;500Rs(above buying &#8377;10,000 )</strong>
+                </div>
+              </div>
+              <div class="row  mb-5">
+                <div class="col-md-6">
+                  <span class="text-black">Total</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <strong class="text-black"><span id="withGst"></span></strong>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <a href="/checkout">
+                  <button class="btn btn-black btn-sm py-3 btn-block ">Proceed To Checkout</button>
+                </a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%-include("footer.ejs")%>
+
+<script>
+  function decreaseQty(user_cart_id)
+  {
+    var new_total="user_total"+user_cart_id;
+     var user_card_qty= "user_qty"+user_cart_id;
+     $.ajax({
+      'url':'/decrease_qnt/'+user_cart_id
+     } ).done(function(result)
+     {
+      console.log(result);
+      document.getElementById(user_card_qty).value=result.new_qty;
+      document.getElementById(new_total).innerHTML=result.new_tot;
+      Subtotal();
+
+     }
+     )
+  }
+  function IncreaseQty(user_cart_id)
+  {
+    var new_total="user_total"+user_cart_id;
+     var user_card_qty= "user_qty"+user_cart_id;
+     $.ajax({
+      'url':'/increase_qnt/'+user_cart_id
+     }).done(function(res)
+     {
+      console.log(res);
+      document.getElementById(user_card_qty).value=res.new_qty;
+      document.getElementById(new_total).innerHTML=res.new_tot;
+      Subtotal();
+
+     })
+
+  }
+  function Subtotal()
+  {
+  var tot= document.getElementsByClassName('user_subtotal');
+
+   var sum=0;
+
+   for(var i=0;i<tot.length;i++)
+   {
+    sum+= Number( tot[i].innerHTML);
+   }
+
+   let part = sum.toString().split('.');
+    part[0] = part[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    var sum2= '₹' + part.join('.');
+
+  $('#allTotal').html(sum2);
+
+  var add_gst=(sum*4.5)/100;
+  sum=sum+add_gst;
+  // console.log("sum"+sum);
+
+  var gst=(sum*3)/100;
+  var With_gst=sum-gst; 
+  if(With_gst>10000)
+  {
+    With_gst=With_gst-500;
+  }
+  let parts = With_gst.toString().split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    var abc= '₹' + parts.join('.');
+
+  $('#withGst').html(abc);
+
+
+
+  }
+  
+Subtotal();
+</script>

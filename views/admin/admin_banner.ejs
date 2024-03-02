@@ -1,0 +1,36 @@
+<%-include('navbar.ejs')%>
+<form action="/admin/admin_banner_data" method="post" enctype="multipart/form-data">
+<div class="container text-capitalize bg- p-3 mb-5">
+    <div class="row ">
+        <div class="col-md-12">
+            <h5>banner data update page...</h5>
+        </div>
+        <div class="col-md-6 mt-3 ">
+            Enter title
+            <input type="text" name="banner_title" value="<%=banner_info.banner_title%>" class="form-control" id="">
+        </div>
+
+        <div class="col-md-6 mt-3 ">
+            Enter detail
+            <textarea name="banner_detail" class="form-control" id=""> <%=banner_info.banner_detail%></textarea>
+        </div>
+
+        <div class="col-md-6 mt-3 ">
+            Enter link
+            <input type="text" name="banner_link" class="form-control" id="" value="<%=banner_info.banner_link%>">
+        </div>
+
+        <div class="col-md-4 mt-3 ">
+            Enter image
+            <input type="file" name="banner_image" class="form-control" id="">
+        </div>
+        <div class="col-2 mt-3">
+            <img src="/uploads/<%=banner_info.banner_image%>" width="100%" height="100px" alt="">
+        </div>
+        <div class="col-12 text-center mt-5">
+            <button class="btn btn-primary w-25 ">Submit</button>
+        </div>
+    </div>
+</div>
+</form>
+<%-include('footer.ejs')%>
